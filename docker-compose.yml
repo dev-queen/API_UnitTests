@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8878:80
+    volumes:
+      - ./:/var/www/candy-shop
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    container_name: candy-shop_nginx
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/candy-shop
+    depends_on:
+        - db
+    container_name: candy-shop_app
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+        - ./tmp/db:/var/lib/mysql
+    environment:
+        MYSQL_DATABASE: candy-shop
+        MYSQL_ROOT_PASSWORD: DEttfpHAhaV2EknGtkFv
+    ports:
+        - 8102:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: candy-shop_db
