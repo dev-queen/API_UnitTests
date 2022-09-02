@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::prefix('/freelancers')->group(function () {
-    Route::get('/', ['users' => 'FreelancerController@getFreelancers']);
-    Route::get('/{freelance_name}', ['users' => 'FreelancerController@get']);
+    Route::get('/', ['users' => 'FreelancerController@get']);
+    Route::get('/{freelance_name}', ['users' => 'FreelancerController@detail']);
     Route::post('/', ['users' => 'FreelancerController@create']);
     Route::delete('/{freelancer_id}', ['users' => 'FreelancerController@delete'])->where(['freelancer_id' => '[0-9+]']);
     Route::put('/{freelancer_id}', ['users' => 'FreelancerController@update'])->where(['freelancer_id' => '[0-9+]']);
