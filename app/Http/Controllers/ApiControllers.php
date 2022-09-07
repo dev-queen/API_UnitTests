@@ -11,6 +11,12 @@ abstract class ApiControllers
 
     public function get(Request $request)
     {
+        $limit = (int) $request->get('limit', 100);
+        $offset = (int) $request->get('offset', 0);
+
+        $result = $this->model->limit($limit)->offset($offset)->get();
+
+        $this->sendResponse($result, 'OK', 200); //TODO вынести в константу
 
     }
 
@@ -23,7 +29,13 @@ abstract class ApiControllers
     {
 
     }
+
     public function delete(int $objectId)
+    {
+
+    }
+
+    public function create()
     {
 
     }
