@@ -2,42 +2,93 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-abstract class ApiControllers
+abstract class ApiControllers extends Controller
 {
-    protected $model;
+    /**
+     * @var Request
+     */
+    protected Request $request;
 
-    public function get(Request $request)
+    /**
+     * @var Model
+     */
+    protected Model $model;
+
+
+    public function index(): mixed
     {
-        $limit = (int) $request->get('limit', 100);
-        $offset = (int) $request->get('offset', 0);
+        $result = $this->model::all();
 
-        $result = $this->model->limit($limit)->offset($offset)->get();
-
-        $this->sendResponse($result, 'OK', 200); //TODO вынести в константу
-
+        return $this->sendResponse($result, 'OK', 200);
     }
 
-    public function detail(string $objectName)
+    /**
+     * @param int $entityId
+     * @return mixed
+     */
+    public function show(int $entityId): mixed
     {
+        $entity = $this->model->find($entityId)->first();
 
+        if (!$entity) {
+            return $this->sendError('Not Found', 404);
+        }
+
+        return $this->sendResponse($entity, 'OK', 200);
     }
 
-    public function update(int $objectId)
+    /**
+     * @param int $entityId
+     * @param Request $request
+     * @return mixed
+     */
+    public function update(int $entityId, Request $request)
     {
+        $entity = $this->model->find($entityId)->first();
 
+        if (!$entity) {
+            return $this->sendError('Not Found', 404);
+        }
+
+        $data = $request->validated();
+
+        $this->model->fill($data)->push();
+
+        return $this->sendResponse(null, 'Updated', 204);
     }
 
-    public function delete(int $objectId)
+    /**
+     * @param int $entityId
+     * @return mixed
+     */
+    public function delete(int $entityId)
     {
+        $entity = $this->model->find($entityId);
 
+        if (!$entity) {
+            return $this->sendError('Not Found', 404);
+        }
+
+        $entity->delete();
+
+        return $this->sendResponse(null, 'Deleted', 204);
     }
 
-    public function create()
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function create(Request $request): mixed
     {
+        $data = $request->validated();
 
+        $this->model->fill($data)->push();
+
+        return $this->sendResponse('Created', 'Created', 201);
     }
+
 
 }

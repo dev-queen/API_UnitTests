@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('applications', function (Blueprint $table) {
-            $table->id('application_id')->unsigned();
+            $table->id();
             $table->string('comment', 250);
             $table->unsignedBigInteger('freelancer_id');
             $table->unsignedBigInteger('order_id');
