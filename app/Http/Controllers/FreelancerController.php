@@ -16,7 +16,7 @@ class FreelancerController extends ApiControllers
      * @param FreelancerRequest $request
      * @return mixed
      */
-    public function createFreelancer(FreelancerRequest $request)
+    public function createFreelancer(FreelancerRequest $request): mixed
     {
         return $this->create($request);
     }
@@ -26,7 +26,7 @@ class FreelancerController extends ApiControllers
      * @param FreelancerRequest $request
      * @return mixed
      */
-    public function updateFreelancer(int $entityId, FreelancerRequest $request)
+    public function updateFreelancer(int $entityId, FreelancerRequest $request): mixed
     {
         return parent::update($entityId, $request);
     }

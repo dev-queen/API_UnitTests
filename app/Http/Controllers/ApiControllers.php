@@ -45,7 +45,7 @@ abstract class ApiControllers extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function update(int $entityId, Request $request)
+    public function update(int $entityId, Request $request): mixed
     {
         $entity = $this->model->find($entityId)->first();
 
@@ -64,7 +64,7 @@ abstract class ApiControllers extends Controller
      * @param int $entityId
      * @return mixed
      */
-    public function delete(int $entityId)
+    public function delete(int $entityId): mixed
     {
         $entity = $this->model->find($entityId);
 
@@ -74,7 +74,7 @@ abstract class ApiControllers extends Controller
 
         $entity->delete();
 
-        return $this->sendResponse(null, 'Deleted', 204);
+        return $this->sendResponse('Deleted', 'Deleted', 204);
     }
 
     /**
