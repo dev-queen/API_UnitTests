@@ -47,17 +47,15 @@ abstract class ApiControllers extends Controller
      */
     public function update(int $entityId, Request $request): mixed
     {
-        $entity = $this->model->find($entityId)->first();
+        $entity = $this->model::find($entityId);
 
         if (!$entity) {
             return $this->sendError('Not Found', 404);
         }
 
-        $data = $request->validated();
+        $entity->update($request->validated());
 
-        $this->model->fill($data)->push();
-
-        return $this->sendResponse(null, 'Updated', 204);
+        return $this->sendResponse($this->model::find($entityId), 'Updated', 201);
     }
 
     /**
@@ -83,11 +81,7 @@ abstract class ApiControllers extends Controller
      */
     public function create(Request $request): mixed
     {
-        $data = $request->validated();
-
-        $this->model->fill($data)->push();
-
-        return $this->sendResponse('Created', 'Created', 201);
+        return $this->sendResponse($this->model::create($request->validated()), 'Created', 201);
     }
 
 
