@@ -72,7 +72,7 @@ abstract class ApiControllers extends Controller
 
         $entity->delete();
 
-        return $this->sendResponse('Deleted', 'Deleted', 204);
+        return $this->sendResponse('', 'Deleted', 204);
     }
 
     /**
