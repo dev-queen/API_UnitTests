@@ -26,29 +26,29 @@ Route::prefix('/freelancers')->group(function () {
     Route::get('/{id}', [FreelancerController::class, 'show']);
     Route::post('/create', [FreelancerController::class, 'createFreelancer']);
     Route::delete('/delete/{id}', [FreelancerController::class, 'delete']);
-    Route::put('/update/{id}', [FreelancerController::class, 'updateFreelancer'])->where(['id' => '[0-9+]']);
+    Route::put('/update/{id}', [FreelancerController::class, 'updateFreelancer']);
 });
 
 Route::prefix('/customers')->group(function () {
     Route::get('/', [CustomerController::class, 'index']);
-    Route::get('/{id}', [CustomerController::class, 'show'])->where(['id' => '[0-9+]']);
+    Route::get('/{id}', [CustomerController::class, 'show']);
     Route::post('/create', [CustomerController::class, 'createCustomer']);
-    Route::delete('/delete/{id}', [CustomerController::class, 'delete'])->where(['id' => '[0-9+]']);
-    Route::put('/update/{id}', [CustomerController::class, 'updateCustomer'])->where(['id' => '[0-9+]']);
+    Route::delete('/delete/{id}', [CustomerController::class, 'delete']);
+    Route::put('/update/{id}', [CustomerController::class, 'updateCustomer']);
 });
 
 Route::prefix('/orders')->group(function () {
     Route::get('/', [OrderController::class, 'index']);
-    Route::get('/{id}', [OrderController::class, 'show'])->where(['id' => '[0-9+]']);
+    Route::get('/{id}', [OrderController::class, 'show']);
     Route::post('/create', [OrderController::class, 'createOrder']);
-    Route::delete('/delete/{id}', [OrderController::class, 'delete'])->where(['id' => '[0-9+]']);
-    Route::put('/update/{id}', [OrderController::class, 'updateOrder'])->where(['id' => '[0-9+]']);
+    Route::delete('/delete/{id}', [OrderController::class, 'delete']);
+    Route::put('/update/{id}', [OrderController::class, 'updateOrder']);
 });
 
 Route::prefix('/applications')->group(function () {
     Route::get('/', [ApplicationController::class, 'index']);
-    Route::get('/{id}', [ApplicationController::class, 'show'])->where(['id' => '[0-9+]']);
+    Route::get('/{id}', [ApplicationController::class, 'show']);
     Route::post('/create', [ApplicationController::class, 'createApplication']);
-    Route::delete('/delete/{id}', [ApplicationController::class, 'delete'])->where(['id' => '[0-9+]']);
-    Route::put('/update/{id}', [ApplicationController::class, 'updateApplication'])->where(['id' => '[0-9+]']);
+    Route::delete('/delete/{id}', [ApplicationController::class, 'delete']);
+    Route::put('/update/{id}', [ApplicationController::class, 'updateApplication']);
 });
