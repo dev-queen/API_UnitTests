@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 abstract class ApiControllers extends Controller
 {
@@ -31,6 +32,7 @@ abstract class ApiControllers extends Controller
      */
     public function show(int $entityId): mixed
     {
+        Cache::put('ke2y', '123nono', now()->addMinutes(10));
         $entity = $this->model->find($entityId)->first();
 
         if (!$entity) {
