@@ -32,7 +32,10 @@ abstract class ApiControllers extends Controller
      */
     public function show(int $entityId): mixed
     {
-        Cache::put('ke2y', '123nono', now()->addMinutes(10));
+        Cache::remember('ke2y', now()->addMinutes(10), function () {
+            return 'xxx';
+        });
+
         $entity = $this->model->find($entityId)->first();
 
         if (!$entity) {

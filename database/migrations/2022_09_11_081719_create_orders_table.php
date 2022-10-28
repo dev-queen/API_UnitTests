@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('description');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('application_id');
+            $table->unsignedBigInteger('freelancer_id');
             $table->timestamps();
         });
     }

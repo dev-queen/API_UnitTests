@@ -21,6 +21,21 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
+
+
 Route::prefix('/freelancers')->group(function () {
     Route::get('/', [FreelancerController::class, 'index']);
     Route::get('/{id}', [FreelancerController::class, 'show']);
@@ -38,6 +53,7 @@ Route::prefix('/customers')->group(function () {
 });
 
 Route::prefix('/orders')->group(function () {
+    Route::get('/free/', [OrderController::class, 'getFreeOrder']);
     Route::get('/', [OrderController::class, 'index']);
     Route::get('/{id}', [OrderController::class, 'show']);
     Route::post('/create', [OrderController::class, 'createOrder']);

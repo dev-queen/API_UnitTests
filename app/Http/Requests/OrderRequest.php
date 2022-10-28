@@ -14,7 +14,7 @@ class OrderRequest extends ApiRequest
         return [
             'description'  => 'required|string',
             'customer_id' =>  'required|int',
-            'application_id' => 'required|int',
+            'freelancer_id' =>  'int',
         ];
     }
 
@@ -28,7 +28,6 @@ class OrderRequest extends ApiRequest
         return [
             'description.required' => 'Description required!',
             'customer_id.required' => 'Customer id required!',
-            'application_id.required' => 'Application required'
         ];
     }
 }

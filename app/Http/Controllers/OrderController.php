@@ -16,7 +16,7 @@ class OrderController extends ApiControllers
      * @param OrderRequest $request
      * @return mixed
      */
-    public function createOrder(OrderRequest $request)
+    public function createOrder(OrderRequest $request): mixed
     {
         return $this->create($request);
     }
@@ -26,9 +26,14 @@ class OrderController extends ApiControllers
      * @param OrderRequest $request
      * @return mixed
      */
-    public function updateOrder(int $entityId, OrderRequest $request)
+    public function updateOrder(int $entityId, OrderRequest $request): mixed
     {
         return parent::update($entityId, $request);
+    }
+
+    public function getFreeOrder(): mixed
+    {
+        return $this->sendResponse($this->model->all()->where('freelancer_id', null), 'OK', 200);
     }
 
 }
